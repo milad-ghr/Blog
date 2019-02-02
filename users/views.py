@@ -68,8 +68,6 @@ def change_password(request):
         else:
             messages.warning(request, 'Your older password is incorrect, enter again!')
             return redirect('changepassword')
-
-
     else:
         form = UserChangePassword(request.user)
         print(form.errors)
