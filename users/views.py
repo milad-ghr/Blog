@@ -72,10 +72,6 @@ def change_password(request):
 
     else:
         form = UserChangePassword(request.user)
-        print(form.errors)
-        print(form.error_messages)
-        print(form.error_class)
-        print('hello')
         return render(request, 'change_password.html', {'form': form})
 
 
