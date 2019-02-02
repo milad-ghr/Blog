@@ -1,0 +1,10 @@
+# Created by .ignore support plugin (hsz.mobi)
+.idea/
+db.sqlite3
+*/migrations/
+venv/
+git-repos/
+__pycache__
+static/
+dumps/
+data_feeds/

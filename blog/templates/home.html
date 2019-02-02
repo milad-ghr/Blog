@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container">
+{% for post in post %}
+    <article class="content-section col-md-8" style="border:groove 1px #b9bbbe ; margin-bottom: 20px; padding:20px 0 20px 30px; background-color: #f3f3f3 ">
+        <div class="media-body">
+            <img class="rounded-circle" style="height: 50px ; width: 50px;" src="{{ post.author.profile.image.url }}">
+            <div class="article-metadata col-md-11" style="display: inline-block; border-bottom: solid 1px #0000004d;margin: 0 0 15px 0">
+                <a id="link-author" style="display: inline-block;" href="#"><h5>{{ post.author }}</h5></a>
+                <small class="text-muted" style="display: inline; padding-left: 20px">{{ post.post_dated|date:"F d, Y"}}</small>
+            </div>
+            <div class="col-md-11">
+                <h3><a class="article-title" id="link-author" href="{% url 'post-detail' post.pk %}" style="color: black;">{{ post.title }}</a></h3>
+                <p class="article-content">{{ post.content }}</p>
+            </div>
+        </div>
+    </article>
+{% endfor %}
+
+    {% if is_paginated %}
+        {% if page_obj.has_previous %}
+            <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+            <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+        {% endif %}
+        {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number  == num %}
+                <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+            {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+            <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+            <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+        {% endif %}
+    {% endif %}
+    </div>
+
+{% endblock content %}

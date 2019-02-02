@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container">
+    <article class="content-section col-md-8" style="border:groove 1px #b9bbbe ; margin-bottom: 20px; padding:20px 0 20px 30px; background-color: #f3f3f3 ">
+        <div class="media-body">
+            <img class="rounded-circle" style="height: 50px ; width: 50px;" src="{{ object.author.profile.image.url }}">
+            <div class="article-metadata col-md-11" style="display: inline-block; border-bottom: solid 1px #0000004d;margin: 0 0 15px 0">
+                <a id="link-author" style="display: inline-block;" href="#"><h4>{{ object.author }}</h4></a>
+                <small class="text-muted" style="display: inline; padding-left: 20px">{{ object.post_dated|date:"F d, Y"}}</small>
+                {% if object.author == user %}
+                    <a class="btn btn-outline-info" style="margin-left: 20px ; margin-bottom: 5px" href="{% url 'post-update' object.id %}">Edit</a>
+                    <a class="btn btn-outline-danger" style="margin-left: 5px ; margin-bottom: 5px" href="{% url 'post-delete' object.id %}">Delete</a>
+
+                {% endif %}
+            </div>
+            <div class="col-md-11">
+                <h3 class="article-title" id="link-author" style="color: black;">{{ object.title }}</h3>
+                <p class="article-content">{{ post.content }}</p>
+            </div>
+        </div>
+    </article>
+    </div>
+{% endblock content %}
