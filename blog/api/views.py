@@ -5,6 +5,9 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.shortcuts import redirect
 from rest_framework import status
+import os
+
+
 class PostCreateView(CreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostCreateSerializer
@@ -32,7 +35,7 @@ class PostListAPIView(APIView):
             return Response(serializer.errors , status=status.HTTP_400_BAD_REQUEST)
 
 
-class PostDetaliView(RetrieveAPIView):
+class PostDetailView(RetrieveAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
@@ -46,3 +49,6 @@ class PostEditView(UpdateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
+
+def test():
+    return 0
