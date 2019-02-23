@@ -27,6 +27,46 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+            'simple': {
+                'format': '[%(asctime)s] %(levelname)s %(title)s %(content)s %(message)s',
+                'datefmt': '%Y-%m-%d %H:%M:%S'
+            },
+            'verbose': {
+                'format': '[%(asctime)s] %(levelname)s [%(name)s.%(funcName)s:%(lineno)d] %(message)s',
+                'datefmt': '%Y-%m-%d %H:%M:%S'
+            },
+        },
+    'handlers': {
+        'export_logfile': {
+            'level': 'INFO',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': 'rootlog.log',
+            'maxBytes': 1024 * 1024 * 5,  # 100MB
+            'backupCount': 5,
+            'formatter': 'simple',
+        },
+    },
+
+
+    'loggers': {
+        'blog': {
+            'handlers': ['export_logfile'],
+            'level': 'DEBUG',
+            'propagate': False,
+
+        },
+        # 'django.request': {
+        #     'handlers': ['export_logfile'],
+        #     'level': 'DEBUG',
+        #     'propagate': False,
+        # },
+    },
+}
+
 
 # Application definition
 
